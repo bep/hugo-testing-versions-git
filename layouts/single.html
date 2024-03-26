@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+{{ with resources.Get "a.jpg" }}
+  {{ with . | resources.Copy "a-copy.jpg" }}
+    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
+  {{ end }}
+{{ end }}
+
+
+{{ with .Resources.Get "b.jpg" }}
+  {{ $targetPath := print $.RelPermalink "b-copy.jpg" }}
+  {{ with . | resources.Copy $targetPath }}
+    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
+    {{ .Publish }}
+  {{ end }}
+{{ end }}
+
+{{ end }}
