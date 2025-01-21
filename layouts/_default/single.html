@@ -1,4 +1,2 @@
-{{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
-{{ end }}
+Hash: {{ .Content | hash.XxHash }}
+Content: {{ .Content }}
