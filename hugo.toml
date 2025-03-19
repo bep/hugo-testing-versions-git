@@ -1,3 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-US'
 title = 'Hugo GitHub Issue #9953'
+
+[params.pandoc.citations]
+style = 'assets/ieee'
