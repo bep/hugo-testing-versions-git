@@ -116,6 +116,11 @@ Embeds a PeerTube video.
       {{- errorf "%s" . }}
     {{- else with .Value }}
       {{- $data = . | transform.Unmarshal }}
+      {{- /* Handle null aspect ratio for videos uploaded prior to PeerTube API v6.1.0. */}}
+      {{- if not $data.aspectRatio }}
+        {{- $aspectRatio := partial "inline/peertube/get-aspect-ratio.html" (dict "data" $data "name" $.Name "position" $.Position) }}
+        {{- $data = merge $data (dict "aspectRatio" $aspectRatio) }}
+      {{- end }}
     {{- else }}
       {{- warnidf "shortcode-peertube" "The %q shortcode was unable to retrieve the remote data. See %s" $.Name $.Position }}
     {{- end }}
@@ -176,4 +181,47 @@ Embeds a PeerTube video.
   {{- end }}
 {{- else }}
   {{- errorf "The %q shortcode requires a %q argument. See %s" .Name "url" .Position }}
+{{- end -}}
+
+{{- define "_partials/inline/peertube/get-aspect-ratio.html" }}
+  {{- $aspectRatio := 0 }}
+
+  {{- $metadataUrl := "" }}
+  {{- range .data.streamingPlaylists }}
+    {{- range .files }}
+      {{- if .hasVideo }}
+        {{- $metadataUrl = .metadataUrl }}
+        {{- break }}
+      {{- end }}
+    {{- end }}
+    {{- if $metadataUrl }}
+      {{- break }}
+    {{- end }}
+  {{- end }}
+
+  {{- with $metadataUrl }}
+    {{- with try (resources.GetRemote .) }}
+      {{- with .Err }}
+        {{- errorf "%s" . }}
+      {{- else with .Value }}
+        {{- with . | transform.Unmarshal }}
+          {{- range .streams }}
+            {{- if and .width .height  }}
+              {{- $aspectRatio = div .width .height }}
+              {{- break }}
+            {{- end }}
+          {{- end }}
+          {{- if not $aspectRatio }}
+            {{- errorf "The %q shortcode was unable to determine the aspect ratio. See %s" $.name $.position }}
+          {{ end }}
+        {{- end }}
+      {{- else }}
+        {{- errorf "The %q shortcode was unable to retrieve the metadata. See %s" $.name $.position }}
+      {{- end }}
+    {{- end }}
+  {{- else }}
+    {{- errorf "The %q shortcode was unable to determine the metadata URL. See %s" $.name $.position }}
+  {{- end }}
+
+  {{- return $aspectRatio }}
 {{- end -}}
