@@ -5,3 +5,14 @@ draft = false
 details = '@@URL@@'
 description = "@@DESCRIPTION@@"
 +++
+
+Loose list:
+
+- $$a^2 + b^2 = c^2$$
+
+- $$a^2 + b^2 = c^2$$
+
+Tight list:
+
+- $$a^2 + b^2 = c^2$$
+- $$a^2 + b^2 = c^2$$

@@ -1,3 +1,13 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-US'
 title = '@@TITLE@@'
+disableKinds = ['page','rss','section','sitemap','taxonomy','term']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
