@@ -1,3 +1,51 @@
 baseURL = 'https://example.org/'
+disableKinds = ['rss','sitemap','taxonomy','term']
+
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = true
+
+# -----------------------------------------------------------------------------
+# Languages
+# -----------------------------------------------------------------------------
+
+[languages.en]
 languageCode = 'en-US'
-title = 'Hugo GitHub Issue #14352'
+languageDirection = 'ltr'
+languageName = 'English'
+weight = 1
+title = 'Hugo GitHub Issue #14352 (en)'
+
+[languages.es]
+languageCode = 'es-ES'
+languageDirection = 'ltr'
+languageName = 'Espanol'
+weight = 2
+title = 'Hugo GitHub Issue #14352 (es)'
+
+# -----------------------------------------------------------------------------
+# Menus (en)
+# -----------------------------------------------------------------------------
+
+[[languages.en.menus.main]]
+name = 'Home'
+pageRef = '/'
+weight = 10
+
+[[languages.en.menus.main]]
+name = 'Help'
+pageRef = '/help'
+weight = 20
+
+# -----------------------------------------------------------------------------
+# Menus (es)
+# -----------------------------------------------------------------------------
+
+[[languages.es.menus.main]]
+name = 'Home'
+pageRef = '/'
+weight = 10
+
+[[languages.es.menus.main]]
+name = 'Ayuda'
+pageRef = '/help'
+weight = 20
