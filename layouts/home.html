@@ -6,7 +6,19 @@
     <p>Description: {{ . }}</p>
   {{ end }}
   {{ with or .Params.url .Params.details }}
-    <hr>
+    <hr />
   {{ end }}
   {{ .Content }}
+  <ul>
+    {{ range site.RegularPages }}
+      <li>
+        <a href="{{ .RelPermalink }}"
+          >{{ .Title }} -
+          {{ with .File }}
+            {{ .Filename | strings.TrimPrefix hugo.WorkingDir }}
+          {{ end }}</a
+        >
+      </li>
+    {{ end }}
+  </ul>
 {{ end }}
