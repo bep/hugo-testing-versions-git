@@ -31,42 +31,38 @@ defaultContentVersionInSubdir = true
   # -----------------------------------------------------------------------------
 
 [versions]
-  [versions.'v0.1.0']
-  [versions.'v0.2.0']
-  [versions.'v0.3.0']
   [versions.'v0.4.0']
-
-    # -----------------------------------------------------------------------------
-    # Mounts
-    # -----------------------------------------------------------------------------
-
-[[module.mounts]]
-  source = 'content/v0.1.0'
-  target = 'content'
-  [module.mounts.sites]
-    [module.mounts.sites.matrix]
-      versions = '**'
-
-[[module.mounts]]
-  source = 'content/v0.2.0'
-  target = 'content'
-  [module.mounts.sites]
-    [module.mounts.sites.matrix]
-      versions = 'v0.[2-9].0'
-
-[[module.mounts]]
-  source = 'content/v0.3.0'
-  target = 'content'
-  [module.mounts.sites]
-    [module.mounts.sites.matrix]
-      versions = 'v0.[3-9].0'
+  [versions.'v0.3.0']
+  [versions.'v0.2.0']
+  [versions.'v0.1.0']
 
 [[module.mounts]]
   source = 'content/v0.4.0'
   target = 'content'
   [module.mounts.sites]
     [module.mounts.sites.matrix]
-      versions = 'v0.[4-9].0'
+      versions = '>= v0.4.0'
+
+[[module.mounts]]
+  source = 'content/v0.3.0'
+  target = 'content'
+  [module.mounts.sites]
+    [module.mounts.sites.matrix]
+      versions = '>= v0.3.0'
+
+[[module.mounts]]
+  source = 'content/v0.2.0'
+  target = 'content'
+  [module.mounts.sites]
+    [module.mounts.sites.matrix]
+      versions = '>= v0.2.0'
+
+[[module.mounts]]
+  source = 'content/v0.1.0'
+  target = 'content'
+  [module.mounts.sites]
+    [module.mounts.sites.matrix]
+      versions = '>= v0.1.0'
 
       # -----------------------------------------------------------------------------
       # Render hooks
